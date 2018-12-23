@@ -1,0 +1,97 @@
+/* -----------------all------------ */
+@font-face {
+    font-family: 'sans';
+
+    src: url('../../fonts/iransans.eot');
+    src: url('../../fonts/iransans.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/iransans.woff') format('woff'),
+    url('../../fonts/iransans.ttf') format('truetype');
+}
+body{
+    font-family: 'sans' !important;
+}
+a, a:hover{
+    text-decoration: none !important;
+    color:white !important;
+    font-family: 'sans';
+}
+
+
+/* -----------------header------------ */
+
+.size-header{
+   /* min-height: 100px; */
+    background-color: #3ea19c;
+    font-size: 22px;
+}
+header #logo-fix{
+    padding: 0 !important;
+
+}
+
+header img{
+    width: 90px;
+    height: 90px;
+    padding: 5px 0 !important;
+}
+.menu ul form#logout-form{
+    height: 50px;
+    line-height: 50px;
+}
+.menu ul a:hover{
+background-color: #87ffbd !important;
+    border: 1px solid #22ff22;
+    color: black !important;
+}
+a.height{
+   margin: 25px 0;
+    display: inline-block;
+}
+
+
+/* -----------------footer------------ */
+.size-footer{
+    background-color: #3ea19c;
+  /*  min-height: 100px; */
+    font-size: 18px;
+}
+footer div .margin{
+    margin: 15px 0;
+}
+
+.active-cyan-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+}
+.active-cyan-3 input[type=text] {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+}
+.active-cyan-3 .fa, .active-cyan-4 .fa {
+    color: #4dd0e1;
+}
+/* -----------------social network icons------------ */
+
+
+
+.wrapper i {
+    padding: 10px;
+    text-shadow: 0 6px 8px rgba(0, 0, 0, 0.6);
+    transition: all ease-in-out 150ms;
+}
+.wrapper a:nth-child(1) {
+    color: #dd4b39 !important;
+}
+.wrapper a:nth-child(2) {
+    color: #4867AA !important;
+}
+.wrapper a:nth-child(3) {
+    color: #1DA1F2 !important;
+}
+.wrapper i:hover {
+    margin-top: -3px;
+    text-shadow: 0 14px 10px rgba(0, 0, 0, 0.4);
+}
+.logo-size{
+    height: 100px;
+}

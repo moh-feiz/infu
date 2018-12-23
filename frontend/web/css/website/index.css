@@ -1,0 +1,76 @@
+/* class with me */
+a{
+    color: #2b542c !important;
+}
+a:hover{
+    color: #119e42 !important;
+}
+div.distance{
+    margin: 25px;
+    border: 4px solid #aeb3b3 !important;
+    padding: 20px;
+    border-radius: 15px;
+
+}
+
+div div.put-comment{
+    border: 2px solid #494b4b;
+    padding: 10px ;
+    margin: 10px;
+}
+div div.put-border{
+    border: 1px solid #2e35b3;
+    margin: 10px 25px;
+    padding: 10px;
+    background-color: #a0bdff;
+
+}
+div div div.like-panel{
+    border: 2px solid #494b4b;
+    padding: 10px ;
+    margin: 10px;
+}
+div time.right-time{
+    float: right;
+}
+/* img loader for delete */
+div img.img-loader{
+    position: relative;
+    display: none;
+
+}
+
+div img.like-website{
+    width: 70px;
+}
+div img.like-website:hover{
+    width: 125px;
+    height: auto;
+}
+
+
+div div.font-name h2{
+    color: #3b0fb3;
+    font-size: 50px !important;
+    font-weight: bolder;
+}
+div .title{
+    background-color: #adadad;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 25px;
+}
+div span.bold-name{
+    font-weight: bolder;
+    font-size: large;
+}
+
+div a.add-comment-website{
+    background-color: rgba(162, 181, 255, 0.9);
+}
+
+
+
+
+
+
