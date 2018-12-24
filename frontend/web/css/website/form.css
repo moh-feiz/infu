@@ -1,0 +1,20 @@
+
+.display-img-2 , .display-img-3 , .display-img-4{
+    display: none !important;
+}
+
+.display-btn-3{
+    display: none ;
+    margin: 10px 0;
+}
+.display-btn-2{
+    margin: 10px 0 ;
+
+}
+.display-btn-4{
+    margin: 10px 0 ;
+    display: none;
+}
+
+
+
