@@ -64,44 +64,87 @@ class Image extends \yii\db\ActiveRecord
         return $imageLayer;
     }
 
-    public static function uploadImage($name,$resizeWidth,$resizeHeight,$folder) {
-        if(!empty($_FILES[$name]['tmp_name'])){
-            $fileName = $_FILES[$name]['tmp_name'];
-            $sourceProperties = getimagesize($fileName);
-            $resizeFileName = time();
-            $uploadPath = Yii::getAlias('@common').'/web/images/'.$folder.'/';
-            $fileExt = pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION);
-            $uploadImageType = $sourceProperties[2];
-            $sourceImageWidth = $sourceProperties[0];
-            $sourceImageHeight = $sourceProperties[1];
-            switch ($uploadImageType) {
-                case IMAGETYPE_JPEG:
-                    $resourceType = imagecreatefromjpeg($fileName);
-                    $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
-                    imagejpeg($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
-                    break;
+    public static function uploadImage($name,$resizeWidth,$resizeHeight,$folder,$multiple = false,$counter = 0) {
+        if($multiple){
+            if(!empty($_FILES[$name]['tmp_name'][$counter])){
+                $fileName = $_FILES[$name]['tmp_name'][$counter];
+                $fileName = $fileName;
+                $sourceProperties = getimagesize($fileName);
+                $resizeFileName = time().$counter;
+                $uploadPath = Yii::getAlias('@common').'/web/images/'.$folder.'/';
+                $fileExt = pathinfo($_FILES[$name]['name'][$counter], PATHINFO_EXTENSION);
+                $uploadImageType = $sourceProperties[2];
+                $sourceImageWidth = $sourceProperties[0];
+                $sourceImageHeight = $sourceProperties[1];
+                switch ($uploadImageType) {
+                    case IMAGETYPE_JPEG:
+                        $resourceType = imagecreatefromjpeg($fileName);
+                        $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
+                        imagejpeg($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
+                        break;
 
-                case IMAGETYPE_GIF:
-                    $resourceType = imagecreatefromgif($fileName);
-                    $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
-                    imagegif($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
-                    break;
+                    case IMAGETYPE_GIF:
+                        $resourceType = imagecreatefromgif($fileName);
+                        $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
+                        imagegif($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
+                        break;
 
-                case IMAGETYPE_PNG:
-                    $resourceType = imagecreatefrompng($fileName);
-                    $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
-                    imagepng($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
-                    break;
+                    case IMAGETYPE_PNG:
+                        $resourceType = imagecreatefrompng($fileName);
+                        $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
+                        imagepng($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
+                        break;
 
-                default:
-                    $imageProcess = 0;
-                    break;
+                    default:
+                        $imageProcess = 0;
+                        break;
+                }
+                if(move_uploaded_file($fileName, $uploadPath. $resizeFileName. ".". $fileExt)){
+
+                    return 'thump_'.$resizeFileName.'.'.$fileExt;
+                }else{
+                    return false;
+                }
             }
-            if(move_uploaded_file($fileName, $uploadPath. $resizeFileName. ".". $fileExt)){
+        }else{
+            if(!empty($_FILES[$name]['tmp_name'])){
+                $fileName = $_FILES[$name]['tmp_name'];
+                $sourceProperties = getimagesize($fileName);
+                $resizeFileName = time();
+                $uploadPath = Yii::getAlias('@common').'/web/images/'.$folder.'/';
+                $fileExt = pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION);
+                $uploadImageType = $sourceProperties[2];
+                $sourceImageWidth = $sourceProperties[0];
+                $sourceImageHeight = $sourceProperties[1];
+                switch ($uploadImageType) {
+                    case IMAGETYPE_JPEG:
+                        $resourceType = imagecreatefromjpeg($fileName);
+                        $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
+                        imagejpeg($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
+                        break;
 
-                return 'thump_'.$resizeFileName.'.'.$fileExt;
-            }else{
-                return false;
+                    case IMAGETYPE_GIF:
+                        $resourceType = imagecreatefromgif($fileName);
+                        $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
+                        imagegif($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
+                        break;
+
+                    case IMAGETYPE_PNG:
+                        $resourceType = imagecreatefrompng($fileName);
+                        $imageLayer = self::resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight,$resizeWidth,$resizeHeight);
+                        imagepng($imageLayer,$uploadPath."thump_".$resizeFileName.'.'. $fileExt);
+                        break;
+
+                    default:
+                        $imageProcess = 0;
+                        break;
+                }
+                if(move_uploaded_file($fileName, $uploadPath. $resizeFileName. ".". $fileExt)){
+
+                    return 'thump_'.$resizeFileName.'.'.$fileExt;
+                }else{
+                    return false;
+                }
             }
         }
         return false;
