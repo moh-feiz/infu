@@ -91,14 +91,35 @@ class WebsiteController extends Controller
         $model = new Website();
 
         $model->user_id=$user_id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            // upload image
-            $image_name = Image::uploadImage('image','600','400','websites');
-            $image = new Image();
-            $image->website_id = Yii::$app->db->lastInsertID;
-            $image->image = $image_name;
-            $image->save();
+        // check if request is post
+        if ($model->load(Yii::$app->request->post())) {
+
+            //save website in database
+            $website = new Website();
+            $website->user_id = $user_id;
+            $website->title = $_POST['Website']['title'];
+            $website->type = $_POST['Website']['type'];
+            $website->description = $_POST['Website']['description'];
+            $website->url = $_POST['Website']['url'];
+
+            // save model and if successful, will upload image
+            if($website->save()){
+
+                // get the last website id that has been saved to website table
+                $website_id = Yii::$app->db->getLastInsertID();
+
+                // upload all images
+                foreach ($_POST['image'] as $index => $each_image){
+                    $image_name = Image::uploadImage('image','600','400','websites',true,$index);
+                    $image = new Image();
+                    $image->website_id = $website_id;
+                    $image->image = $image_name;
+                    $image->save();
+                }
+            }
+
+
 
             return $this->redirect('index');
         }else{
